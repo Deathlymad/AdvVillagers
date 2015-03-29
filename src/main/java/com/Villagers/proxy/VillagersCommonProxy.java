@@ -1,6 +1,6 @@
-package com.deathlymad.Death.proxy;
+package com.Villagers.proxy;
 
-public class RecipeBluePrintsCommonProxy {
+public class VillagersCommonProxy {
 	
 	//private static Map<String, bool> extendedEntityData = new HashMap<String, int>();
 	

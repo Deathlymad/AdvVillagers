@@ -2,8 +2,12 @@ package com.Villagers.Main;
 
 import net.minecraftforge.common.config.Configuration;
 
-import com.deathlymad.Death.proxy.RecipeBluePrintsCommonProxy;
+import com.Villagers.Entity.AdvVillager;
+import com.Villagers.Model.ModelAdvVillager;
+import com.Villagers.proxy.VillagersCommonProxy;
+import com.Villagers.render.RenderAdvVillager;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -21,14 +25,19 @@ public class Villagers {
 	@Instance(value="Villagers")
 	public final Villagers instance = this;
 			
-	@SidedProxy(clientSide="com.deathlymad.DeathPatch.proxy.DeathPatchClientProxy", serverSide="com.deathlymad.DeathPatch.proxy.DeathPatchCommonProxy")
-	public static RecipeBluePrintsCommonProxy proxy;
+	@SidedProxy(clientSide="com.Villagers.proxy.VillagersClientProxy", serverSide="com.Villagers.proxy.VillagersCommonProxy")
+	public static VillagersCommonProxy proxy;
 		
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.save();
-		EntityRegistry.registerModEntity(entityClass, entityName, id, mod, trackingRange, updateFrequency, sendsVelocityUpdates);
+		
+
+	    EntityRegistry.registerGlobalEntityID(AdvVillager.class,"AdvVillager",EntityRegistry.findGlobalUniqueEntityId(),  (255 << 16), (255 << 16)+ (200 << 8));
+		//EntityRegistry.addSpawn("Advanced Villager", 100, 1, 32, EnumCreatureType.creature, BiomeGenBase.plains);
+		
+		RenderingRegistry.registerEntityRenderingHandler(AdvVillager.class, new RenderAdvVillager(new ModelAdvVillager(), 0.5f));
 	}
 		
 	@EventHandler

@@ -7,5 +7,6 @@ public class AdvVillager extends EntityLiving {
 
 	public AdvVillager(World world) {
 		super(world);
+		
 	}
 }
